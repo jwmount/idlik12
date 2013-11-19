@@ -1,0 +1,40 @@
+
+<% form_for @user, url: {action: "create"}, html: {class: "join_idlika"} do |f| %>
+
+  <div class="aglabelform"><%= f.label :username %>:
+  <span class="required">*</span></div>
+  <div class="agtext"><%= f.text_field :username %></div>
+  <div class="clearer"></div><br/>
+  
+  <div class="aglabelform"><%= f.label :email %>:
+  <span class="required">*</span></div>
+  <div class="agtext"><%= f.text_field :email %></div>
+  <div class="clearer"></div><br/>
+
+  <div class="aglabelform"><%= f.label :password %>:
+  <span class="required">*</span></div>
+  <div class="agtext"><%= f.password_field :password %></div>
+  <div class="clearer"></div><br/>
+  
+  <div class="aglabelform"><%= f.label :password %>:
+  <span class="required">*</span></div>
+  <div class="agtest"><%= f.password_field :password_confirmation %></div>
+  <div class="clearer"></div><br/>
+ 
+  <div class="idlikablue">
+    <%= f.check_box( :terms_accepted_cb ) %>I have read and accept idlika's 
+    <%= link_to 'Terms and Conditions.', terms_path, :target=> 'blank' %>
+  </div>
+  </p>
+<!-- ROLES selection check boxes - probably put these in the admin app
+  <p>
+    <%= f.label :roles %><br />
+    <% for role in Role.all %>
+      <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+      <%=h role.name %> - <%=h role.description %><br />
+    <% end %>
+  </p>
+-->	
+  <p><%= image_submit_tag("/assets/btn_signup_on.gif") %></div>
+
+<% end %>

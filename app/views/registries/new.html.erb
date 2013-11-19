@@ -1,0 +1,30 @@
+<div id="li_body">
+<%= render :partial => 'shared/sidebar' %>
+<div id="li_content">
+  <h1 class="new_registry"></h1>
+
+<%= form_for @registry, url: {action: "create"}, html: {class: "new_registry"} do |f| %>
+
+<div id="addgift_form">
+<div class="clearer"></div>
+
+<div class="aglabel">Registry <%= f.label :name %>:</div>
+<div class="agfield" style="width:100px;"><%= f.text_field :name, :class=>"agtext" %></div>
+<div class="clearer"></div>
+  <div class="aglabel"></div>
+  <div class="agfield" stylesheet="margin:20px">
+	  <%= image_submit_tag("/assets/btn_createregistry_on.gif") %></div>
+	</div> <!-- addgift_form -->
+
+<% end %> <!-- form -->
+
+</div><!-- li_content -->
+<br />
+<div class="aglabel"></div>
+<div class="agfield"><!-- link_to 'Back', user_registries_path(@user) --></div>
+<div class="clearer"></div>
+</div><!-- li_body --> 
+
+ 
+
+

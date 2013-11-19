@@ -1,0 +1,39 @@
+<div id="li_body">
+<%= render :partial => 'shared/sidebar' %>
+
+<div id="li_content">
+
+<h1 class="my_account"></h1>
+
+  <% form_for @user, url: {action: "edit"}, html: {class: "addgift_form"}do |f| %>
+
+  <div id="addgift_form">
+
+    <div class="clearer"></div>
+    <div class="aglabel">Name:</div>
+    <div class="agfield"> <%= f.text_field :username, :size=>'60' %></div>
+    
+    <div class="clearer"></div>
+    <div class="aglabel">Email:</div>
+    <div class="agfield"> <%= f.text_field :email, :size=>'60' %></div>
+
+    <div class="clearer"></div>
+    <div class="aglabel">Password:</div>
+    <div class="agfield"> <%= f.password_field :password, :size=>'60' %></div>
+ 
+    <div class="clearer"></div>
+    <div class="aglabel">Confirm Password:</div>
+    <div class="agfield"> <%= f.password_field :password_confirmation, :size=>'60' %></div>
+    <div class="clearer"></div>
+
+  <p><%= image_submit_tag("/assets/btn_submit_on.gif") %></div>
+
+  <% end %>
+  </div><!-- addgift_form -->
+
+<!-- link_to 'Back', gifts_path -->
+
+</div><!-- li_content -->
+
+<div class="clearer"></div>
+</div><!-- li_body -->

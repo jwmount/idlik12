@@ -1,0 +1,37 @@
+<div id="li_body">
+
+<div id="li_content">
+
+<h1 class="login"></h1>
+<br/>
+
+<%= form_for @user_session, url: {action: "create"}, html: {class: "addgift_form"} do |f| %>
+  
+
+  <div class="aglabel" style="width:100px;"><%= f.label :username %>:
+  <span class="required">*</span></div>
+
+  <div class="agfield"><%= f.text_field :username %></div>
+  <div class="clearer"></div>
+
+  <div class="aglabel" style="width:100px;">Password:
+  <spac class="required">*</span></div>
+  
+  <div><%= f.password_field :password %></div>
+  <div class="clearer"></div>
+
+  <p><%= image_submit_tag("/assets/btn_login_on.gif") %></div>
+
+</div><!-- addgift_form -->
+
+<% end %>
+
+<br /></br />
+<!-- link_to 'Back', gifts_path -->
+<br /></br />
+<br /></br />
+<br /></br />
+</div><!-- li_content -->
+<div class="clearer"></div>
+</div><!-- li_body -->
+

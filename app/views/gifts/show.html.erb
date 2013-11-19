@@ -1,0 +1,55 @@
+<% title 'Gift Details' %>
+<div id="li_body">
+
+  <% if @friend.nil? %>
+    <%= render :partial => 'shared/sidebar' %>
+  <% else %>
+    <%= render :partial => 'shared/friend_sidebar' %>
+  <% end %>
+<div id="li_content">
+  <h1 class="about_this_gift"></h1>
+
+<p>
+  <%= link_to (image_tag @gift.photo.url(:large)), @gift.URL, :target=>'blank' %>
+</p>
+<p>
+  <b>Gift Name:</b>
+  <%=h @gift.name %>
+</p>
+<% unless @gift.registry.nil? %>
+<p>
+	<b>Gift Registry:</b>
+	<%= @gift.registry.name %>
+</p>
+<p>
+	<b>Where I found it:</b>
+	<%= @gift.source %>
+</p>
+<p>
+	<b>Gift URL:</b>
+	<%= link_to @gift.URL, "http://#{@gift.URL}/", :popup=>true %>
+</p>
+<% end %>
+<p>
+  <b>Gift Description:</b>
+  <%=h @gift.description %>
+</p>
+
+<% if !session[:current_friend].nil? %>
+  <%= link_to 'I want one too!',  @gift_copy_gift_path %> | 
+<% end %>
+
+<% if @user == current_user %>
+  <%= link_to 'Edit', edit_user_gift_path(@user,@gift) %>
+
+<% end %>
+
+<!-- I'LL GET THIS appears only when visiting someone else's list -->
+<%= link_to( "I'll Get This Gift for #{@user.username}", @gift_give_gift_path ) unless @user.id == current_user[:id] %>
+
+<br />
+
+</div><!-- li_content -->
+
+<div class="clearer"></div>
+</div><!-- li_body -->

@@ -1,0 +1,33 @@
+<div id="li_body">
+
+<div id="li_content">
+
+<h1 class="welcome_to_idlika"></h1>
+
+<h3>Now that you've joined, what's next?  
+  <ol>	
+    <li>Create a Registry.</li>
+    <%= link_to 'How you do this', "/assets/scr_newregistry.gif", :popup => ['some window', 'height=185, width=550'] %><br/><br/>
+
+    <li>Add Gifts (these are images)</li><br/>
+      <ul>
+	    <li>From your phone</li><br/>
+        <li>From web sites</li>
+	    <%= link_to 'How you do this', "/assets/scr_website.gif", :popup => ['web site', 'height=218, width=320'] %><br/><br/>
+
+        <li>From your digital camera</li>
+      </ul><br/>
+    <li>Invite Friends</li>
+    <%= link_to 'How you do this', "/assets/scr_invitefriend.gif", :popup => ['web site', 'height=130, width=320'] %><br/><br/>
+
+    <li>Explore and Have Fun!</li>
+  </ol>
+<br/>
+<br/>
+<%= link_to(image_tag("/assets/btn_continue_on.gif", {:alt => 'Start using idlika', :class=>"ta_start"}), gifts_path) %></li>
+
+
+</div><!-- li_content -->
+<div class="clearer"></div>
+</div><!-- li_body -->
+

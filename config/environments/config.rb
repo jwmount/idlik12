@@ -1,0 +1,15 @@
+# was in config/amazon-s3.yml
+development:
+    bucket: <%= ENV['S3_BUCKET'] %>
+    access_key_id: <%= ENV['S3_KEY'] %>
+    secret_access_key: <%= ENV['S3_SECRET'] %>
+    
+test:
+    bucket: <%= ENV['S3_BUCKET'] %>
+    access_key_id: <%= ENV['S3_KEY'] %>
+    secret_access_key: <%= ENV['S3_SECRET'] %>
+    
+production:
+  bucket: <%= ENV['S3_BUCKET'] %>
+  access_key_id: <%= ENV['S3_KEY'] %>
+  secret_access_key: <%= ENV['S3_SECRET'] %>

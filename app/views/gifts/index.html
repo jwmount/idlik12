@@ -1,0 +1,31 @@
+<% title 'Gift index' %>
+<br/>
+<div id="li_body">
+	
+  <%= render :partial => 'shared/sidebar' %>
+  
+  <div id="li_content">
+
+    <% if @registry.nil? %>
+      <%= render :partial => 'home/how' %>
+    <% else %>
+    <h2><%=h @registry.name %></h2>
+
+      <% if @gifts.count == 0 %>
+
+	    <h5>This registry is empty, so you could delete it.  Better idea:  put something in it.</h5>
+        <%= link_to 'Delete Registry', user_registry_path(@user, @registry), :method => 'DELETE', :prompt => 'Sure?' %>
+
+      <% else %>
+
+    <h3>To Change Friends or Registry Click on Image</h3>
+      <%= render :partial => 'registry_container', :collection => @gifts %>
+
+    <% end %>
+  <% end %>
+</div><!-- li_content -->
+<div class="clearer"></div>
+</div><!-- li_body -->
+
+
+

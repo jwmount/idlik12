@@ -1,0 +1,24 @@
+
+<% form_for :user, @friend, :url=>invitation_url, :html=>{:method=>'put'} do |f| %>
+  <%= f.error_messages %>
+  <div id="addgift_form">
+
+  <div class="clearer"></div>
+  <div class="aglabel" style="width:100px;">Friend's Name:</div>
+  <div class="agfield"> <%= f.text_field :username %></div>
+  <br />
+  
+  <div class="clearer"></div>
+  <div class="aglabel" style="width:100px;">Friend's Email:</div>
+  <div class="agfield"> <%= f.text_field :email %></div>
+
+  <div class="clearer"></div>
+  <div class="aglabel" style="width:100px;">Message:</div>
+  <%= text_area_tag @user.message %>
+  <br />
+  <div class="clearer"></div>
+
+ <%= image_submit_tag("/assets/btn_invite_on.gif") %>
+</div>
+
+<% end %>

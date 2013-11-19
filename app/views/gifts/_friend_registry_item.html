@@ -1,0 +1,29 @@
+
+<div class="item">
+
+<% if !gift.name.nil? %>
+<%= link_to (image_tag gift.photo.url(:preview)), user_gift_path(@friend,gift.id) %>
+
+  <div class="item_inner" style="background-position:50%, 50%; background-repeat:no-repeat;">
+
+      <h3><%=h gift.name %> </h3>
+      <p><%=h gift.description %></p>
+
+  </div><!-- item_inner -->
+
+<% else %>
+
+  <div class="item_inner" style="background:url(assets/items/item1.jpg); background-position:50%, 50%; background-repeat:no-repeat;">
+	  <div class="actions">
+
+	      <a href="item.html"><img src="assets/btn_details.png" alt="Show Details / Edit Item" /></a>
+
+	  </div><!-- actions -->
+  </div><!-- item_inner -->
+
+<% end %>	
+
+</div><!-- item -->
+
+<div class="clearer"></div>
+
