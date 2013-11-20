@@ -4,15 +4,13 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem 
 
   helper :all
+  helper_method :current_user_session, :current_user, :show_links?
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
 # protect_from_forgery :secret => '9847618af6620f8564a5f7ef12f48a5a'
-  before_filter { |c| Authorization.current_user = c.current_user }
-
-  helper_method :current_user
-  helper_method :show_links?
+# before_filter { |c| Authorization.current_user = c.current_user }
 
   
   def FB_init
@@ -22,11 +20,6 @@ class ApplicationController < ActionController::Base
       page.hide 'status-indicator', 'cancel-link'
     end
   end
-
-  
-
-  # = = = = = =  = = = = = = = = = == =  
-  protected
   
   def permission_denied
     flash[:error] = "Sorry, you are not allowed to access that page."
@@ -105,24 +98,27 @@ class ApplicationController < ActionController::Base
      end
  end
    
-  # current_user can only be altered by login/logout
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.record
-  end
-
+#
+# private user management via Authlogic
+#
+  private
 
   def require_user
-    #unless current_user
-    #  flash[:notice] = "You must be logged in to access more pages -- register with us!"
-    #  redirect_to root_url
-    #end
-    true
+    unless current_user
+      flash[:notice] = "You must be logged in to access more pages -- register with us!"
+      redirect_to root_url
+    end
   end
 
-  def current_user_session
-    return @current_user_session if defined?(@current_user_session)
-  end
-   
+   def current_user_session
+      return @current_user_session if defined?(@current_user_session)
+      @current_user_session = UserSession.find
+   end
+
+  # current_user can only be altered by login/logout
+  def current_user
+      return @current_user if defined?(@current_user)
+      @current_user = current_user_session && current_user_session.user
+  end   
 end
 

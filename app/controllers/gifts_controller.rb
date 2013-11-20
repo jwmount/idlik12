@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 class GiftsController < ApplicationController
   before_filter :require_user 
 
@@ -12,13 +12,13 @@ class GiftsController < ApplicationController
   # If there are no registries, cannot be any gifts.  So notify user and depart.
   # If there are registries, hold onto registry[0] (why?) and return what's in them as appropriate.
   def index
-    @gifts = @user.registries.gifts
-    begin 
-      session[:current_registry] = user.registries.where(:id == 1) #registry[0].id
-    rescue
-      flash[:info] = "No registries or gifts found, time to create some? " 
-#      @gifts = user_registry.gifts
-    end
+    @registries = @user.registries
+    if @registries.count == 0
+      flash[:info] = "No registries or gifts found, time to create some?"
+      redirect_to root_path
+    else
+      flash[:info] = "#{@registries.count.to_i} Registries found, time to create gifts?"
+    end 
   end
 
   # set @registry passed in to current so gifts are collected in it
@@ -68,7 +68,7 @@ class GiftsController < ApplicationController
     if @user.registries.empty?
       redirect_to gifts_path
     else
-      @gift = @user.gifts.new
+      @gift = @user.registry.gift.new
     end
   end
 

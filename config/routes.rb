@@ -79,8 +79,8 @@ Idlik12::Application.routes.draw do
   get 'advertise',          to: 'home#advertise',           as: :advertise
   get 'contact',            to: 'home#contact',             as: :contact
 
-  #resources :registries
   resources :roles,         has_many: :users
+  resources :registries
   resources :sources
 
   resources :user_sessions
@@ -91,16 +91,14 @@ Idlik12::Application.routes.draw do
 
 
   resources :users do #,   has_many: [:registries, :roles, :gifts, :friends]
-    resources :registries
-    # create named paths, reference as user_<name>_path(@user)
+    resources :registries do
+      resources :gifts
+    end
     get 'invite',             to: 'users#invite',             as: :invite
     get 'invitation',         to: 'users#invitation',         as: :invitation
     get 'accept_invite',      to: 'users#accept_invite',      as: :accept_invite
   end
 
-  resources :registries do
-    resources :gifts
-  end
     
   resources :gifts do
     resources :donors

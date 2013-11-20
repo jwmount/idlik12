@@ -1,118 +1,140 @@
-
-
-<% @user.registries.all.each do |r|%>n                            Prefix Verb   URI Pattern                                   Controller#Action
-                              root GET    /                                             home#index
-                            donors GET    /donors(.:format)                             donors#index
-                                   POST   /donors(.:format)                             donors#create
-                         new_donor GET    /donors/new(.:format)                         donors#new
-                        edit_donor GET    /donors/:id/edit(.:format)                    donors#edit
-                             donor GET    /donors/:id(.:format)                         donors#show
-                                   PATCH  /donors/:id(.:format)                         donors#update
-                                   PUT    /donors/:id(.:format)                         donors#update
-                                   DELETE /donors/:id(.:format)                         donors#destroy
-                             gifts GET    /gifts(.:format)                              gifts#index {:has_many=>[:donors, :sources]}
-                                   POST   /gifts(.:format)                              gifts#create {:has_many=>[:donors, :sources]}
-                          new_gift GET    /gifts/new(.:format)                          gifts#new {:has_many=>[:donors, :sources]}
-                         edit_gift GET    /gifts/:id/edit(.:format)                     gifts#edit {:has_many=>[:donors, :sources]}
-                              gift GET    /gifts/:id(.:format)                          gifts#show {:has_many=>[:donors, :sources]}
-                                   PATCH  /gifts/:id(.:format)                          gifts#update {:has_many=>[:donors, :sources]}
-                                   PUT    /gifts/:id(.:format)                          gifts#update {:has_many=>[:donors, :sources]}
-                                   DELETE /gifts/:id(.:format)                          gifts#destroy {:has_many=>[:donors, :sources]}
-                            friend GET    /friend(.:format)                             gifts#friend
-                     select_friend GET    /select_friend(.:format)                      gifts#select_friend
-                  index_for_friend GET    /index_for_friend(.:format)                   gifts#index_for_friend
-                index_for_registry GET    /index_for_registry(.:format)                 gifts#index_for_registry
-                give_restore_owner GET    /gift_restore_owner(.:format)                 gifts#give_restore_owner
-                         give_gift GET    /give_gift(.:format)                          gifts#give_gift
-                         copy_gift GET    /copy_gift(.:format)                          gifts#copy_gift
-                              home POST   /home(.:format)                               homes#create
-                          new_home GET    /home/new(.:format)                           homes#new
-                         edit_home GET    /home/edit(.:format)                          homes#edit
-                                   GET    /home(.:format)                               homes#show
-                                   PATCH  /home(.:format)                               homes#update
-                                   PUT    /home(.:format)                               homes#update
-                                   DELETE /home(.:format)                               homes#destroy
-                               how GET    /how(.:format)                                home#how
-                              what GET    /what(.:format)                               home#what
-                               faq GET    /faq(.:format)                                home#faq
-                              tell GET    /tell(.:format)                               home#tell
-                           privacy GET    /privacy(.:format)                            home#privacy
-                             terms GET    /terms(.:format)                              home#terms
-                         advertise GET    /advertise(.:format)                          home#advertise
-                           contact GET    /contact(.:format)                            home#contact
-                             roles GET    /roles(.:format)                              roles#index {:has_many=>:users}
-                                   POST   /roles(.:format)                              roles#create {:has_many=>:users}
-                          new_role GET    /roles/new(.:format)                          roles#new {:has_many=>:users}
-                         edit_role GET    /roles/:id/edit(.:format)                     roles#edit {:has_many=>:users}
-                              role GET    /roles/:id(.:format)                          roles#show {:has_many=>:users}
-                                   PATCH  /roles/:id(.:format)                          roles#update {:has_many=>:users}
-                                   PUT    /roles/:id(.:format)                          roles#update {:has_many=>:users}
-                                   DELETE /roles/:id(.:format)                          roles#destroy {:has_many=>:users}
-                           sources GET    /sources(.:format)                            sources#index
-                                   POST   /sources(.:format)                            sources#create
-                        new_source GET    /sources/new(.:format)                        sources#new
-                       edit_source GET    /sources/:id/edit(.:format)                   sources#edit
-                            source GET    /sources/:id(.:format)                        sources#show
-                                   PATCH  /sources/:id(.:format)                        sources#update
-                                   PUT    /sources/:id(.:format)                        sources#update
-                                   DELETE /sources/:id(.:format)                        sources#destroy
-                     user_sessions GET    /user_sessions(.:format)                      user_sessions#index
-                                   POST   /user_sessions(.:format)                      user_sessions#create
-                  new_user_session GET    /user_sessions/new(.:format)                  user_sessions#new
-                 edit_user_session GET    /user_sessions/:id/edit(.:format)             user_sessions#edit
-                      user_session GET    /user_sessions/:id(.:format)                  user_sessions#show
-                                   PATCH  /user_sessions/:id(.:format)                  user_sessions#update
-                                   PUT    /user_sessions/:id(.:format)                  user_sessions#update
-                                   DELETE /user_sessions/:id(.:format)                  user_sessions#destroy
-                             login GET    /login(.:format)                              user_sessions#new
-                            logout GET    /logout(.:format)                             user_sessions#destroy
-                               new GET    /signup(.:format)                             user_sessions#new
-                            orient GET    /orient(.:format)                             user_sessions#orient
-                   user_registries GET    /users/:user_id/registries(.:format)          registries#index
-                                   POST   /users/:user_id/registries(.:format)          registries#create
-                 new_user_registry GET    /users/:user_id/registries/new(.:format)      registries#new
-                edit_user_registry GET    /users/:user_id/registries/:id/edit(.:format) registries#edit
-                     user_registry GET    /users/:user_id/registries/:id(.:format)      registries#show
-                                   PATCH  /users/:user_id/registries/:id(.:format)      registries#update
-                                   PUT    /users/:user_id/registries/:id(.:format)      registries#update
-                                   DELETE /users/:user_id/registries/:id(.:format)      registries#destroy
-                        user_roles GET    /users/:user_id/roles(.:format)               roles#index
-                                   POST   /users/:user_id/roles(.:format)               roles#create
-                     new_user_role GET    /users/:user_id/roles/new(.:format)           roles#new
-                    edit_user_role GET    /users/:user_id/roles/:id/edit(.:format)      roles#edit
-                         user_role GET    /users/:user_id/roles/:id(.:format)           roles#show
-                                   PATCH  /users/:user_id/roles/:id(.:format)           roles#update
-                                   PUT    /users/:user_id/roles/:id(.:format)           roles#update
-                                   DELETE /users/:user_id/roles/:id(.:format)           roles#destroy
-                        user_gifts GET    /users/:user_id/gifts(.:format)               gifts#index
-                                   POST   /users/:user_id/gifts(.:format)               gifts#create
-                     new_user_gift GET    /users/:user_id/gifts/new(.:format)           gifts#new
-                    edit_user_gift GET    /users/:user_id/gifts/:id/edit(.:format)      gifts#edit
-                         user_gift GET    /users/:user_id/gifts/:id(.:format)           gifts#show
-                                   PATCH  /users/:user_id/gifts/:id(.:format)           gifts#update
-                                   PUT    /users/:user_id/gifts/:id(.:format)           gifts#update
-                                   DELETE /users/:user_id/gifts/:id(.:format)           gifts#destroy
-                      user_friends GET    /users/:user_id/friends(.:format)             friends#index
-                                   POST   /users/:user_id/friends(.:format)             friends#create
-                   new_user_friend GET    /users/:user_id/friends/new(.:format)         friends#new
-                  edit_user_friend GET    /users/:user_id/friends/:id/edit(.:format)    friends#edit
-                       user_friend GET    /users/:user_id/friends/:id(.:format)         friends#show
-                                   PATCH  /users/:user_id/friends/:id(.:format)         friends#update
-                                   PUT    /users/:user_id/friends/:id(.:format)         friends#update
-                                   DELETE /users/:user_id/friends/:id(.:format)         friends#destroy
-                       user_invite GET    /users/:user_id/invite(.:format)              users#invite
-                   user_invitation GET    /users/:user_id/invitation(.:format)          users#invitation
-                user_accept_invite GET    /users/:user_id/accept_invite(.:format)       users#accept_invite
-                             users GET    /users(.:format)                              users#index
-                                   POST   /users(.:format)                              users#create
-                          new_user GET    /users/new(.:format)                          users#new
-                         edit_user GET    /users/:id/edit(.:format)                     users#edit
-                              user GET    /users/:id(.:format)                          users#show
-                                   PATCH  /users/:id(.:format)                          users#update
-                                   PUT    /users/:id(.:format)                          users#update
-                                   DELETE /users/:id(.:format)                          users#destroy
-         graph_authorization_rules GET    /authorization_rules/graph(.:format)          authorization_rules#graph
-        change_authorization_rules GET    /authorization_rules/change(.:format)         authorization_rules#change
-suggest_change_authorization_rules GET    /authorization_rules/suggest_change(.:format) authorization_rules#suggest_change
-               authorization_rules GET    /authorization_rules(.:format)                authorization_rules#index
-              authorization_usages GET    /authorization_usages(.:format)               authorization_usages#index
+                            Prefix Verb   URI Pattern                                                      Controller#Action
+                              root GET    /                                                                home#index
+                            donors GET    /donors(.:format)                                                donors#index
+                                   POST   /donors(.:format)                                                donors#create
+                         new_donor GET    /donors/new(.:format)                                            donors#new
+                        edit_donor GET    /donors/:id/edit(.:format)                                       donors#edit
+                             donor GET    /donors/:id(.:format)                                            donors#show
+                                   PATCH  /donors/:id(.:format)                                            donors#update
+                                   PUT    /donors/:id(.:format)                                            donors#update
+                                   DELETE /donors/:id(.:format)                                            donors#destroy
+                             gifts GET    /gifts(.:format)                                                 gifts#index {:has_many=>[:donors, :sources]}
+                                   POST   /gifts(.:format)                                                 gifts#create {:has_many=>[:donors, :sources]}
+                          new_gift GET    /gifts/new(.:format)                                             gifts#new {:has_many=>[:donors, :sources]}
+                         edit_gift GET    /gifts/:id/edit(.:format)                                        gifts#edit {:has_many=>[:donors, :sources]}
+                              gift GET    /gifts/:id(.:format)                                             gifts#show {:has_many=>[:donors, :sources]}
+                                   PATCH  /gifts/:id(.:format)                                             gifts#update {:has_many=>[:donors, :sources]}
+                                   PUT    /gifts/:id(.:format)                                             gifts#update {:has_many=>[:donors, :sources]}
+                                   DELETE /gifts/:id(.:format)                                             gifts#destroy {:has_many=>[:donors, :sources]}
+                            friend GET    /friend(.:format)                                                gifts#friend
+                     select_friend GET    /select_friend(.:format)                                         gifts#select_friend
+                  index_for_friend GET    /index_for_friend(.:format)                                      gifts#index_for_friend
+                index_for_registry GET    /index_for_registry(.:format)                                    gifts#index_for_registry
+                give_restore_owner GET    /gift_restore_owner(.:format)                                    gifts#give_restore_owner
+                         give_gift GET    /give_gift(.:format)                                             gifts#give_gift
+                         copy_gift GET    /copy_gift(.:format)                                             gifts#copy_gift
+                              home POST   /home(.:format)                                                  homes#create
+                          new_home GET    /home/new(.:format)                                              homes#new
+                         edit_home GET    /home/edit(.:format)                                             homes#edit
+                                   GET    /home(.:format)                                                  homes#show
+                                   PATCH  /home(.:format)                                                  homes#update
+                                   PUT    /home(.:format)                                                  homes#update
+                                   DELETE /home(.:format)                                                  homes#destroy
+                               how GET    /how(.:format)                                                   home#how
+                              what GET    /what(.:format)                                                  home#what
+                               faq GET    /faq(.:format)                                                   home#faq
+                              tell GET    /tell(.:format)                                                  home#tell
+                           privacy GET    /privacy(.:format)                                               home#privacy
+                             terms GET    /terms(.:format)                                                 home#terms
+                         advertise GET    /advertise(.:format)                                             home#advertise
+                           contact GET    /contact(.:format)                                               home#contact
+                             roles GET    /roles(.:format)                                                 roles#index {:has_many=>:users}
+                                   POST   /roles(.:format)                                                 roles#create {:has_many=>:users}
+                          new_role GET    /roles/new(.:format)                                             roles#new {:has_many=>:users}
+                         edit_role GET    /roles/:id/edit(.:format)                                        roles#edit {:has_many=>:users}
+                              role GET    /roles/:id(.:format)                                             roles#show {:has_many=>:users}
+                                   PATCH  /roles/:id(.:format)                                             roles#update {:has_many=>:users}
+                                   PUT    /roles/:id(.:format)                                             roles#update {:has_many=>:users}
+                                   DELETE /roles/:id(.:format)                                             roles#destroy {:has_many=>:users}
+                        registries GET    /registries(.:format)                                            registries#index
+                                   POST   /registries(.:format)                                            registries#create
+                      new_registry GET    /registries/new(.:format)                                        registries#new
+                     edit_registry GET    /registries/:id/edit(.:format)                                   registries#edit
+                          registry GET    /registries/:id(.:format)                                        registries#show
+                                   PATCH  /registries/:id(.:format)                                        registries#update
+                                   PUT    /registries/:id(.:format)                                        registries#update
+                                   DELETE /registries/:id(.:format)                                        registries#destroy
+                           sources GET    /sources(.:format)                                               sources#index
+                                   POST   /sources(.:format)                                               sources#create
+                        new_source GET    /sources/new(.:format)                                           sources#new
+                       edit_source GET    /sources/:id/edit(.:format)                                      sources#edit
+                            source GET    /sources/:id(.:format)                                           sources#show
+                                   PATCH  /sources/:id(.:format)                                           sources#update
+                                   PUT    /sources/:id(.:format)                                           sources#update
+                                   DELETE /sources/:id(.:format)                                           sources#destroy
+                     user_sessions GET    /user_sessions(.:format)                                         user_sessions#index
+                                   POST   /user_sessions(.:format)                                         user_sessions#create
+                  new_user_session GET    /user_sessions/new(.:format)                                     user_sessions#new
+                 edit_user_session GET    /user_sessions/:id/edit(.:format)                                user_sessions#edit
+                      user_session GET    /user_sessions/:id(.:format)                                     user_sessions#show
+                                   PATCH  /user_sessions/:id(.:format)                                     user_sessions#update
+                                   PUT    /user_sessions/:id(.:format)                                     user_sessions#update
+                                   DELETE /user_sessions/:id(.:format)                                     user_sessions#destroy
+                             login GET    /login(.:format)                                                 user_sessions#new
+                            logout GET    /logout(.:format)                                                user_sessions#destroy
+                               new GET    /signup(.:format)                                                user_sessions#new
+                            orient GET    /orient(.:format)                                                user_sessions#orient
+               user_registry_gifts GET    /users/:user_id/registries/:registry_id/gifts(.:format)          gifts#index
+                                   POST   /users/:user_id/registries/:registry_id/gifts(.:format)          gifts#create
+            new_user_registry_gift GET    /users/:user_id/registries/:registry_id/gifts/new(.:format)      gifts#new
+           edit_user_registry_gift GET    /users/:user_id/registries/:registry_id/gifts/:id/edit(.:format) gifts#edit
+                user_registry_gift GET    /users/:user_id/registries/:registry_id/gifts/:id(.:format)      gifts#show
+                                   PATCH  /users/:user_id/registries/:registry_id/gifts/:id(.:format)      gifts#update
+                                   PUT    /users/:user_id/registries/:registry_id/gifts/:id(.:format)      gifts#update
+                                   DELETE /users/:user_id/registries/:registry_id/gifts/:id(.:format)      gifts#destroy
+                   user_registries GET    /users/:user_id/registries(.:format)                             registries#index
+                                   POST   /users/:user_id/registries(.:format)                             registries#create
+                 new_user_registry GET    /users/:user_id/registries/new(.:format)                         registries#new
+                edit_user_registry GET    /users/:user_id/registries/:id/edit(.:format)                    registries#edit
+                     user_registry GET    /users/:user_id/registries/:id(.:format)                         registries#show
+                                   PATCH  /users/:user_id/registries/:id(.:format)                         registries#update
+                                   PUT    /users/:user_id/registries/:id(.:format)                         registries#update
+                                   DELETE /users/:user_id/registries/:id(.:format)                         registries#destroy
+                       user_invite GET    /users/:user_id/invite(.:format)                                 users#invite
+                   user_invitation GET    /users/:user_id/invitation(.:format)                             users#invitation
+                user_accept_invite GET    /users/:user_id/accept_invite(.:format)                          users#accept_invite
+                             users GET    /users(.:format)                                                 users#index
+                                   POST   /users(.:format)                                                 users#create
+                          new_user GET    /users/new(.:format)                                             users#new
+                         edit_user GET    /users/:id/edit(.:format)                                        users#edit
+                              user GET    /users/:id(.:format)                                             users#show
+                                   PATCH  /users/:id(.:format)                                             users#update
+                                   PUT    /users/:id(.:format)                                             users#update
+                                   DELETE /users/:id(.:format)                                             users#destroy
+                       gift_donors GET    /gifts/:gift_id/donors(.:format)                                 donors#index
+                                   POST   /gifts/:gift_id/donors(.:format)                                 donors#create
+                    new_gift_donor GET    /gifts/:gift_id/donors/new(.:format)                             donors#new
+                   edit_gift_donor GET    /gifts/:gift_id/donors/:id/edit(.:format)                        donors#edit
+                        gift_donor GET    /gifts/:gift_id/donors/:id(.:format)                             donors#show
+                                   PATCH  /gifts/:gift_id/donors/:id(.:format)                             donors#update
+                                   PUT    /gifts/:gift_id/donors/:id(.:format)                             donors#update
+                                   DELETE /gifts/:gift_id/donors/:id(.:format)                             donors#destroy
+                                   GET    /gifts(.:format)                                                 gifts#index
+                                   POST   /gifts(.:format)                                                 gifts#create
+                                   GET    /gifts/new(.:format)                                             gifts#new
+                                   GET    /gifts/:id/edit(.:format)                                        gifts#edit
+                                   GET    /gifts/:id(.:format)                                             gifts#show
+                                   PATCH  /gifts/:id(.:format)                                             gifts#update
+                                   PUT    /gifts/:id(.:format)                                             gifts#update
+                                   DELETE /gifts/:id(.:format)                                             gifts#destroy
+                     donor_sources GET    /donors/:donor_id/sources(.:format)                              sources#index
+                                   POST   /donors/:donor_id/sources(.:format)                              sources#create
+                  new_donor_source GET    /donors/:donor_id/sources/new(.:format)                          sources#new
+                 edit_donor_source GET    /donors/:donor_id/sources/:id/edit(.:format)                     sources#edit
+                      donor_source GET    /donors/:donor_id/sources/:id(.:format)                          sources#show
+                                   PATCH  /donors/:donor_id/sources/:id(.:format)                          sources#update
+                                   PUT    /donors/:donor_id/sources/:id(.:format)                          sources#update
+                                   DELETE /donors/:donor_id/sources/:id(.:format)                          sources#destroy
+                                   GET    /donors(.:format)                                                donors#index
+                                   POST   /donors(.:format)                                                donors#create
+                                   GET    /donors/new(.:format)                                            donors#new
+                                   GET    /donors/:id/edit(.:format)                                       donors#edit
+                                   GET    /donors/:id(.:format)                                            donors#show
+                                   PATCH  /donors/:id(.:format)                                            donors#update
+                                   PUT    /donors/:id(.:format)                                            donors#update
+                                   DELETE /donors/:id(.:format)                                            donors#destroy
+         graph_authorization_rules GET    /authorization_rules/graph(.:format)                             authorization_rules#graph
+        change_authorization_rules GET    /authorization_rules/change(.:format)                            authorization_rules#change
+suggest_change_authorization_rules GET    /authorization_rules/suggest_change(.:format)                    authorization_rules#suggest_change
+               authorization_rules GET    /authorization_rules(.:format)                                   authorization_rules#index
+              authorization_usages GET    /authorization_usages(.:format)                                  authorization_usages#index

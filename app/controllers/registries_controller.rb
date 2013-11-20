@@ -4,10 +4,10 @@ class RegistriesController < ApplicationController
 
   before_filter :require_user 
   before_filter :find_user
-  
+
   def index
     if session[:current_friend].nil?
-      redirect_to user_gifts_path(@user)
+      redirect_to user_registry_path(@user, @user.registries )
     else
       redirect_to :controller => 'gifts', :action => 'select_friend', :friend_id => session[:current_friend].id
     end
@@ -42,8 +42,7 @@ class RegistriesController < ApplicationController
   # POST /registries
   # POST /registries.xml
   def create
-    #@registry = @user.registries.new(params[:registry])
-    @registry = @user.registries.create(params.permit(:id))
+    @registry = @user.registries.new(registry_params)t(:id))
 
     respond_to do |format|
       if @registry.save
