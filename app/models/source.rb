@@ -1,9 +1,7 @@
 class Source < ActiveRecord::Base
 
-  belongs_to :gift
-  belongs_to :user
+  belongs_to :donor
   
-  validates_associated :gift
-  validates_associated :user
+  validates_associated :donor
 
 end

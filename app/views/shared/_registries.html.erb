@@ -1,6 +1,6 @@
+<!== rendered from _sidebar partial ==>
 
-
-<% @user.registries.all.each do |r|%>
+<% @user.registries.each do |r| %>
   <% if !r.name.nil? %>
     <li><%= link_to r.name, :controller=>'gifts', 
                              :action=>'index_for_registry', 

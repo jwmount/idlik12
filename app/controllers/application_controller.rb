@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   
 
   # = = = = = =  = = = = = = = = = == =  
-#  protected
+  protected
   
   def permission_denied
     flash[:error] = "Sorry, you are not allowed to access that page."
@@ -111,18 +111,16 @@ class ApplicationController < ActionController::Base
     @current_user = current_user_session && current_user_session.record
   end
 
- # = = = = = = = = = = = = = = = == =  
- private
 
   def require_user
-    unless current_user
-      flash[:notice] = "You must be logged in to access more pages -- register with us!"
-      redirect_to root_url
-      return false
-    end
+    #unless current_user
+    #  flash[:notice] = "You must be logged in to access more pages -- register with us!"
+    #  redirect_to root_url
+    #end
+    true
   end
 
-  def XXcurrent_user_session
+  def current_user_session
     return @current_user_session if defined?(@current_user_session)
   end
    

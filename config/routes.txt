@@ -1,4 +1,6 @@
-                            Prefix Verb   URI Pattern                                   Controller#Action
+
+
+<% @user.registries.all.each do |r|%>n                            Prefix Verb   URI Pattern                                   Controller#Action
                               root GET    /                                             home#index
                             donors GET    /donors(.:format)                             donors#index
                                    POST   /donors(.:format)                             donors#create

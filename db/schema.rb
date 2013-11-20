@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(:version => 20100814182947) do
   end
 
   create_table "gifts", :force => true do |t|
-    t.integer  "user_id",                               :null => false
     t.integer  "registry_id",                           :null => false
     t.string   "name",                                  :null => false
     t.string   "source",             :default => "",    :null => false
@@ -78,8 +77,7 @@ ActiveRecord::Schema.define(:version => 20100814182947) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "sources", :force => true do |t|
-    t.integer  "gift_id"
-    t.integer  "user_id"
+    t.integer  "donor_id"
     t.boolean  "claim_cb"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -87,7 +85,6 @@ ActiveRecord::Schema.define(:version => 20100814182947) do
 
   create_table "users", :force => true do |t|
     t.text     "friends",                              :null => false
-    t.string   "role_id"
     t.string   "username",          :default => "",    :null => false
     t.string   "email",             :default => "",    :null => false
     t.boolean  "terms_accepted_cb", :default => false, :null => false

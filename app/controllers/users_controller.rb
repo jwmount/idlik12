@@ -80,11 +80,20 @@ class UsersController < ApplicationController
     @user = current_user
     render :action => :invite
   end
-# = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+#
+# = P R I V A T E = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+#
 private
 
-  def mailer_set_url_options
 # TEMPORARY -- turned off Thurs pm 7-22 to enable app to run, email may not work
-#    MemberMailer::Base.default_url_options[:host] = request.host_with_port
+# Turned on Nov 19, 2013 to reactivate as part of idlik12
+  def mailer_set_url_options
+    MemberMailer::Base.default_url_options[:host] = request.host_with_port
   end
+
+#
+# S T R O N G  P A R A M E T E R S
+#  
+  #attr_accessible :username, :email, :password, :password_confirmation, :terms_accepted_cb
+ 
 end

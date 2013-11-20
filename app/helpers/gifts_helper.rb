@@ -25,5 +25,6 @@ module GiftsHelper
     return 'unassigned' if rid.nil?
     return (Registry.find rid, :select => :name).name
   end
+
   
 end

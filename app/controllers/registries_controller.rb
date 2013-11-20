@@ -1,6 +1,8 @@
 class RegistriesController < ApplicationController
-  before_filter :require_user 
+
   layout 'application'  
+
+  before_filter :require_user 
   before_filter :find_user
   
   def index
@@ -26,10 +28,10 @@ class RegistriesController < ApplicationController
   def new
     @registry = @user.registries.new
 
-   # respond_to do |format|
-   #   format.html  # new.html.erb
-   #   format.xml  { render :xml => @registry }
-   # end
+    respond_to do |format|
+       format.html  # new.html.erb
+       format.xml  { render :xml => @registry }
+     end
   end
 
   # GET /registries/1/edit

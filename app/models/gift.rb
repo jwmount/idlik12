@@ -1,9 +1,7 @@
 class Gift < ActiveRecord::Base
  
- belongs_to :user
  belongs_to :registry
  has_many   :donors
- has_many   :sources, :dependent => :destroy
   
  serialize :who_can_see
 

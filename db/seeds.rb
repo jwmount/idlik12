@@ -18,16 +18,15 @@ end
 # Create users (roles not implemented yet, MUST be chosen from roles_list)
 
 user_list = [
-  [ "admin", "admin@example.com", 'demo'],
-  [ "staff", "staff@example.com", 'staff_role'], 
-  [ "john", "john@venuesoftware.com", 'vendor_support'],
-  [ "peta", "peta.forbes@roster365.com.au", 'management'],
-  [ "tony", "tgodino@me.com", 'vendor_support']
+  [ "admin", "admin@example.com" ],
+  [ "staff", "staff@example.com" ], 
+  [ "john", "john@venuesoftware.com" ],
+  [ "peta", "peta.forbes@roster365.com.au" ],
+  [ "tony", "tgodino@me.com" ]
   ]
 user_list.each do |username, email, role|  
   User.create!( 
   	          friends: "",
-  	          role_id: 1,
   	          username: username,
   	          email: email, 
   	          password: '12345', 

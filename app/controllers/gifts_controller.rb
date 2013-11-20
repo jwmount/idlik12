@@ -1,4 +1,4 @@
-require 'debugger'
+#require 'debugger'
 class GiftsController < ApplicationController
   before_filter :require_user 
 
@@ -7,22 +7,18 @@ class GiftsController < ApplicationController
   before_filter :find_user
   before_filter :find_friend, :except => :select_friend_registry
  
+
   # Display gifts user is permitted to see; owner can see all.
+  # If there are no registries, cannot be any gifts.  So notify user and depart.
+  # If there are registries, hold onto registry[0] (why?) and return what's in them as appropriate.
   def index
-=begin
-    if user.registries.empty?
-      #do something useful
-      registry = nil
-    else
-      registry = user.registries
-      session[:current_registry] = registry[0].id
-      debugger
-      #@gifts = Gift.all( :conditions=>["registry_id = ?", @registry[0].id ], :limit=>9 ) 
-      #@gifts = @user.gifts.where( registry_id:  @registry[0].id ).limit[9]
-      @gifts = user_registry.gifts
-    end
-=end
     @gifts = @user.registries.gifts
+    begin 
+      session[:current_registry] = user.registries.where(:id == 1) #registry[0].id
+    rescue
+      flash[:info] = "No registries or gifts found, time to create some? " 
+#      @gifts = user_registry.gifts
+    end
   end
 
   # set @registry passed in to current so gifts are collected in it
@@ -177,7 +173,6 @@ class GiftsController < ApplicationController
     @value = params[:friend]
     @value = params[@value]
 #    @permit = params[@value].nil? ? {friend.username, 'no'} : {friend.username, 'yes'}  
-   debugger  
     @permit = params[@value].nil? ? friend.username == 'no' : friend.username == 'yes'
 
     @gift.who_can_see = {}

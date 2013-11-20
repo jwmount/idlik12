@@ -92,13 +92,22 @@ Idlik12::Application.routes.draw do
 
   resources :users do #,   has_many: [:registries, :roles, :gifts, :friends]
     resources :registries
-    resources :roles
-    resources :gifts
-    resources :friends
     # create named paths, reference as user_<name>_path(@user)
     get 'invite',             to: 'users#invite',             as: :invite
     get 'invitation',         to: 'users#invitation',         as: :invitation
     get 'accept_invite',      to: 'users#accept_invite',      as: :accept_invite
+  end
+
+  resources :registries do
+    resources :gifts
+  end
+    
+  resources :gifts do
+    resources :donors
+  end
+
+  resources :donors do
+    resources :sources
   end
 
 
