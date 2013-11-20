@@ -42,7 +42,7 @@ class RegistriesController < ApplicationController
   # POST /registries
   # POST /registries.xml
   def create
-    @registry = @user.registries.new(registry_params)t(:id))
+    @registry = @user.registries.new(registry_params)
 
     respond_to do |format|
       if @registry.save
