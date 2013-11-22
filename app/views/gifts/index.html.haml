@@ -12,7 +12,7 @@
   -else
     %h2= @registry.name
 
-    -if @user.gifts.count == 0
+    -if @registry.gifts.empty?
       %h5= "This registry is empty, so you could delete it.  Better idea:  put something in it!"
       = button_to "Delete Registry", @registry, method: :delete, prompt: 'Sure?', remote: true
     -else

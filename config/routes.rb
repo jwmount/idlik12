@@ -68,10 +68,10 @@ Idlik12::Application.routes.draw do
   get 'give_gift',          to: 'gifts#give_gift',          as: :give_gift
   get 'copy_gift',          to: 'gifts#copy_gift',          as: :copy_gift
 
-  resources :gifts do
+  resources :gifts
     #get 'registry_toggle', to: 'gifts#registry_toggle', as: :registry_toggle
-    get 'init_index',       to: 'gifts#init_index',         as: :init_index
-  end
+  get 'init_index',       to: 'gifts#init_index',         as: :init_index
+  
 
   resource :home
   get 'how',                to: 'home#how',                 as: :how

@@ -1,0 +1,9 @@
+//rendered from _sidebar partial
+
+- @user.registries.each do |r|
+
+  -if !r.name.nil?
+    %li= link_to r.name, controller:'gifts', action:'index_for_registry', registry_id: r.id 
+    - if r.name == "#{ENV['DEFAULT_REGISTRY_NAME']}"
+      %br
+

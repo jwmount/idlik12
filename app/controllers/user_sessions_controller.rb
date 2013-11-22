@@ -1,4 +1,4 @@
-#require 'debugger'
+require 'debugger'
 class UserSessionsController < ApplicationController
  Authlogic::Session::Base.controller = Authlogic::ControllerAdapters::RailsAdapter.new(self) 
  layout 'welcome'
@@ -11,7 +11,6 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
-      #redirect_to registries_url
       redirect_to gifts_path
     else
       render :action => 'new'

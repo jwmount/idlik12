@@ -1,0 +1,18 @@
+
+#li_sidebar
+
+  %ul
+    %li= image_tag "sidenav_myregistries.gif"
+    =render :partial => "shared/registries"
+
+    - if @user.id == current_user[:id]
+      %li= link_to_unless_current '', new_user_registry_path(@user), :class => "newreg"
+      -if @new_registry 
+        %li= render :partial => 'shared/new_gift_registry'
+        %li= link_to_unless_current '', new_gift_path, :class => "addgift"
+        %li= link_to_unless_current '', user_invite_path(@user), :class => "invitefriend"
+
+    - if !@user.friends.nil?
+      %br
+      %li= "Friends' Registries"
+      %li= render :partial => "shared/friends", :collection => @user.friends

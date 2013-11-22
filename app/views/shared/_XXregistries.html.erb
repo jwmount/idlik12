@@ -1,0 +1,15 @@
+<!== rendered from _sidebar partial ==>
+
+<% @user.registries.each do |r| %>
+  <% if !r.name.nil? %>
+    <li><%= link_to r.name, @user_gift_registry_index_path(@user, r) %></li>
+    <li><!= link_to r.name, controller:'gifts', 
+                             action:'index_for_registry', 
+                             registry_id: r.id 
+        !=></li>
+    <% if r.name == "#{ENV['DEFAULT_REGISTRY_NAME']}"%>
+      <br/>
+    <% end %>
+  <% end %>
+<% end %>
+
