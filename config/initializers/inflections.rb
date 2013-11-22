@@ -8,7 +8,7 @@
 #   inflect.singular /^(ox)en/i, '\1'
 #   inflect.irregular 'person', 'people'
 #   inflect.uncountable %w( fish sheep )
-   inflect.plural /^(registry)ies$/i, '\1'
+   inflect.irregular 'registry', 'registries'
  end
 
 # These inflection rules are supported but not enabled by default:

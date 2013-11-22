@@ -60,7 +60,6 @@ Idlik12::Application.routes.draw do
 
 
   resources :donors
-  resources :gifts,   has_many: [:donors, :sources]
   get 'friend',             to: 'gifts#friend',             as: :friend
   get 'select_friend',      to: 'gifts#select_friend',      as: :select_friend
   get 'index_for_friend',   to: 'gifts#index_for_friend',   as: :index_for_friend
@@ -68,6 +67,11 @@ Idlik12::Application.routes.draw do
   get 'gift_restore_owner', to: 'gifts#give_restore_owner', as: :give_restore_owner
   get 'give_gift',          to: 'gifts#give_gift',          as: :give_gift
   get 'copy_gift',          to: 'gifts#copy_gift',          as: :copy_gift
+
+  resources :gifts do
+    #get 'registry_toggle', to: 'gifts#registry_toggle', as: :registry_toggle
+    get 'init_index',       to: 'gifts#init_index',         as: :init_index
+  end
 
   resource :home
   get 'how',                to: 'home#how',                 as: :how
@@ -91,15 +95,16 @@ Idlik12::Application.routes.draw do
 
 
   resources :users do #,   has_many: [:registries, :roles, :gifts, :friends]
-    resources :registries do
-      resources :gifts
-    end
     get 'invite',             to: 'users#invite',             as: :invite
     get 'invitation',         to: 'users#invitation',         as: :invitation
     get 'accept_invite',      to: 'users#accept_invite',      as: :accept_invite
   end
 
-    
+  resources :users do    
+    resources :gifts
+    resources :registries
+  end
+
   resources :gifts do
     resources :donors
   end
@@ -109,6 +114,14 @@ Idlik12::Application.routes.draw do
   end
 
 
+=begin
+  get 'registry_toggle'    to: 'gift#registry_toggle,      as: :registry_toggle
+  '      { :on => 'change',  :url => { :controller=>'gifts', 
+                                  :action => 'registry_toggle', #'registry_toggle', 
+                                  :user_id => @user, 
+                                  :gift_id => @gift.id,
+                                  :registry_id => registry.id },
+=end
 
   #? map.connect ':controller/:action/:id'
   #? map.connect ':controller/:action/:id.:format'

@@ -1,0 +1,30 @@
+<!-- render :partial => 'who_can_see' -->
+<div class="aglabel"></div>
+<!--
+HANDLE CASE OF LONE REGISTRATION WITH NO FRIENDS
+DO NOT YIELD ANYTHING if @user.friends is {nil,nil}.
+DO NOT YIELD ANYTHING if @user.friends is " \n".
+FIGURE OUT WHAT SETS THESE VALUES!!!!
+-->
+
+<% unless @user.friends.empty? %>
+  <% @user.friends.each_value do |name| %>
+    <% unless name.nil? or !allowed_to_view? name %>
+      <div class="agfield"><%= check_box_tag name.tr(' ','_'), :checked, name  %><%= name %></div>
+    <% else %>
+      <div class="agfield"><%= check_box_tag name.tr(' ','_'),           name  %><%= name %></div>
+    <% end %>
+
+	<%= observe_field name.tr(' ','_'),
+	  { :on => 'change',  :url => { :controller=>'gifts', 
+		                            :action => 'gift_toggle', 
+		                            :user_id => @user, 
+		                            :gift_id => @gift.id, 
+		                            :friend => "#{name.tr(' ','_')}" },
+	                              :with => name.tr(' ','_') 
+    }
+  %>
+    <div class="aglabel"></div>
+  <% end %>
+<% end %>
+<div class="clearer"></div>

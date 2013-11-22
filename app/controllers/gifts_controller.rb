@@ -9,17 +9,20 @@ class GiftsController < ApplicationController
  
 
   # Display gifts user is permitted to see; owner can see all.
-  # If there are no registries, cannot be any gifts.  So notify user and depart.
-  # If there are registries, hold onto registry[0] (why?) and return what's in them as appropriate.
+  # If there are no registries, cannot be any gifts.  So notify user and redirect_to ????.
+  # If there are registries, hold onto registry[0] (why?) and return what's in there as appropriate.
   def index
-    @registries = @user.registries
-    if @registries.count == 0
+    if @user.registries.empty?
       flash[:info] = "No registries or gifts found, time to create some?"
-      redirect_to root_path
     else
-      flash[:info] = "#{@registries.count.to_i} Registries found, time to create gifts?"
-    end 
+      registries = @user.registries
+      session[:current_registry] = registries[0].id
+      @registry = Registry.find session[:current_registry]
+      @gifts = @registry.gifts
+    end
+    @gifts
   end
+
 
   # set @registry passed in to current so gifts are collected in it
   def index_for_registry
@@ -65,16 +68,11 @@ class GiftsController < ApplicationController
 
 
   def new
-    if @user.registries.empty?
-      redirect_to gifts_path
-    else
-      @gift = @user.registry.gift.new
-    end
+      @gift = Gift.new
   end
 
-
   def edit
-    @gift = Gift.find params[:id]
+    @gift = Gift.find params.required(:id)
   end
 
   def images
@@ -94,12 +92,15 @@ class GiftsController < ApplicationController
   
   # New gifts must go into a registry.  If none exists, one has to be created.
   def create
-
-    #@gift = @user.gifts.create(params.permit(:id))
     @gift = @user.gifts.create(gift_params)
     respond_to do |format|
+      if @gift.registry_id.nil?
+        flash[:warning] = Gift::GIFT_REGISTRY_MISSING
+        format.html { redirect_to( edit_gift_path(@gift) ) }
+        format.xml  { render :xml => @gift.errors, :status => :unprocessable_entity }
+      end
       if @gift.save
-        flash[:notice] = 'Gift is now part of your collection.'
+        flash[:notice] = Gift::GIFT_INDUCTED
         format.html { redirect_to( edit_gift_path(@gift) ) }
         format.xml  { render :xml => @gift, :status => :created, :location => @gift }
       else
@@ -110,16 +111,11 @@ class GiftsController < ApplicationController
   end
 
   def update
-    begin
-      @gift = Gift.find params[:id]
-    rescue
-      @gift = Gift.new params[:id]
-    end
-    @gift.save
+    @gift = Gift.find params[:id]
     respond_to do |format|
-      if @gift.update_attributes(params[:gift])
+      if @gift.save
         flash[:notice] = Gift::GIFT_UPDATE_OK
-        format.html { redirect_to(@gift) }
+        format.html { redirect_to gifts_path }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -190,7 +186,6 @@ class GiftsController < ApplicationController
   def registry_toggle
     @gift = Gift.find params[:gift_id]
     @gift.registry_id = params[:registry_id]
-    @gift.null_gates
     @gift.save
     redirect_to :action => 'edit', :id => @gift
   end
@@ -245,19 +240,20 @@ class GiftsController < ApplicationController
   # since you'll be able to reuse the same permit list between create and update. Also, you
   # can specialize this method with per-user checking of permissible attributes.
   def gift_params
-    params.require(:gift).permit(
-                                  :registry_id,
+    params.require(:gift).permit( :description,
                                   :name,
+                                  :registry_id,
                                   :source,
-                                  :description,
                                   :URL,
                                   :i_can_see,
                                   :friends_can_see,
-                                  :who_can_see,
+                                  :photo,
                                   :photo_file_name,
                                   :photo_content_type,
                                   :photo_file_size,
-                                  :photo_updated_at
+                                  :photo_updated_at,
+                                  :user_id,
+                                  :who_can_see
                                   )
   end
 

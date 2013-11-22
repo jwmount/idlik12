@@ -77,7 +77,6 @@ class RegistriesController < ApplicationController
   # DELETE /registries/1
   # DELETE /registries/1.xml
   def destroy
-    
     @registry = Registry.find(params[:id])
     @registry.destroy
     logger.info "*-*-*-*-* #{@registry.name} deleted by #{@user.username}."

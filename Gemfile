@@ -6,8 +6,8 @@ gem 'rails', '>=4.0.1'
 gem 'rake'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-gem 'mysql2'
+#gem 'sqlite3'
+#gem 'mysql2'
 gem 'pg'
 
 # Allows the use of foreign keys used to protect data integrity (per Xavier Shay)
@@ -24,6 +24,7 @@ gem "sendgrid"
 gem 'cancan'
 gem 'haml'
 gem 'carrierwave'
+gem "nokogiri"
 # needed by Heroku
 gem 'taps'  
 # Needed for Rails 4.0 on Heroku

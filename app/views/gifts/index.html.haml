@@ -1,0 +1,25 @@
+.title
+  %h1= 'Gift index'
+  %br
+
+#li_body
+  = render 'shared/sidebar'
+  
+#li_content
+
+  -if @user.registries.empty?
+    = render 'home/how'
+  -else
+    %h2= @registry.name
+
+    -if @user.gifts.count == 0
+      %h5= "This registry is empty, so you could delete it.  Better idea:  put something in it!"
+      = button_to "Delete Registry", @registry, method: :delete, prompt: 'Sure?', remote: true
+    -else
+      %h3= "To Change Friends or Registry Click on Image"
+      = render 'registry_container', :collection => @gifts
+
+#clearer
+
+
+

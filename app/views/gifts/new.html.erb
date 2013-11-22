@@ -4,7 +4,7 @@
 
 <div id="li_content">
   <h1 class="add_a_gift"><b>Add A Gift</b></h1>
-  <%= form_for @gift, :url => user_gifts_path(@user), :html => { :multipart => true } do |f| %>
+  <%= form_for @gift, :url => {action: 'create'}, :html => { :multipart => true } do |f| %>
 
     <div id="addgift_form">
 	

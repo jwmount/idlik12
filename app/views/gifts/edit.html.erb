@@ -10,7 +10,7 @@
   <div class="agfield"><%= image_tag @gift.photo.url(:preview) %></div>
   <div class="clearer"></div>
 
-<% form_for(@gift) do |f| %>
+  <%= form_for @gift, :url => {action: 'update'}, :html => { :multipart => true } do |f| %>
   <div id="addgift_form">
 
   <div class="clearer"></div>

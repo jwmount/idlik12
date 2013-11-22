@@ -1,0 +1,70 @@
+<!-- shared/header.html.erb -->
+
+<div id="step123">
+	
+    <div id="step1">
+	<% if 1 %>
+	  <h1><b>Step 1</b></h1>
+	<% else %>
+	  <a href="my-idlika.html"><h1><b>Step 1</b></h1>
+	<% end %>
+    <h2><b>Sign Up</b></h2>
+    <p>Whether you're on Facebook, have an iPhone, or just want to sign up online, idlika fits your lifestyle and is easy to take with you, anywhere!</p>
+    <img src="assets/step1_stuff.png" alt="Step 1" /></a>
+    </div><!-- step1 -->
+    
+    <div id="step2">
+	<% if 1 %>
+	  <h1><b>Step 2</b></h1>
+    <% else %>
+      <a href="my-idlika.html"><h1><b>Step 2</b></h1>
+	<% end %>
+    <h2><b>Create Your Idlika Registry</b></h2>
+    <img src="assets/step2_stuff.png" alt="Step 2" style="float:right; margin:10px 10px 0px 0px;" />
+    <p>idlika lets you assemble your personalized registry from online links and photos you take yourself!</p></a>
+    </div><!-- step2 -->
+    
+    <div id="step3">
+	<% if 1 %>
+      <h1><b>Step 3</b></h1>
+	<% else %>
+      <a href="my-idlika.html"><h1><b>Step 3</b></h1>
+	<% end %>
+    <h2><b>Shop Or Share</b></h2>
+    <p>Use your registry to streamline your shopping and help remember great items you want — or share it with friends for your birthday, aniversary and more!</p>
+    <img src="assets/step3_stuff.png" alt="Step 3" style="margin-top:-15px;" /></a>
+    </div><!-- step3 -->
+
+<div class="clearer"></div>
+</div><!-- step123 -->
+<br/><br/>
+
+<!-- div id="take_action" -->
+<% if show_links? %>
+  <ul>
+	<ui style="float:left;">
+	    <%= link_to(image_tag("/assets/btn_getstarted.gif", {:alt => 'Start using idlika', :class=>"ta_start"}), new_user_path) %></li>
+	<ui style="float:center;">
+		    <%= link_to(image_tag("/assets/btn_howitworks.gif", {:alt => 'How to use idlika', :class=>"ta_how"}), how_path)%></li>
+	<ui>
+	    <%= link_to(image_tag("/assets/btn_login.gif",  {:alt => 'login to idlika',  :class=>"ta_login"}), new_user_session_path) %></li>
+    <br/>
+    <ui><iframe src="http://www.facebook.com/widgets/like.php?href=http://www.idlika.com"
+        scrolling="no" frameborder="0"
+        style="border:none; width:450px; height:80px"></iframe>
+    </ui>
+    <!-- fb:friendpile></fb:friendpile -->
+
+  </ul>
+
+<!-- % else %>
+  <ul><li><a href="login.html" class="ta_login"><b>Log In</b></a></li>
+	<li><a href="how-it-works.html" class="ta_how"><b>How It Works</b></a></li>
+    <li><a href="get-started.html" class="ta_start"><b>Get Started</b></a></li>
+  </ul -->
+<% end %>
+</div><!-- take_action -->
+
+<!-- shared/footer.html.erb -->
+
+
