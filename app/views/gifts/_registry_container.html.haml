@@ -1,0 +1,21 @@
+// registry container, that is the contents of the registry
+
+%table
+  - @gifts.each do |gift|
+    %tr
+      %td
+
+      .item
+
+        = link_to (image_tag gift.photo.url(:preview)), user_gift_path(@user,gift.id)
+
+        .item_inner
+        = gift.name
+        // path should be user_gift_share_path
+        = link_to (image_tag("btn_share.png")), user_gift_path(@user,gift), alt: "Share Item"
+        = link_to (image_tag("btn_details.png")), user_gift_path(@user,gift)
+        = link_to (image_tag("btn_delete.png" )), gift_path(gift.id), 
+             data: {confirm: "Are you sure you want to remove this item?"}, method: :delete 
+
+#clearer
+

@@ -1,14 +1,16 @@
+// registry included container
+
 %br
-<!-- registry included container -->
-.aglabel
+
+#aglabel
   Which Registry To Use?:
-  <span class="required">*</span></div>
+  %span class="required" *
 
   - @user.registries.each do |registry|
     - unless registry.name == "#{ENV['DEFAULT_REGISTRY_NAME']}" 
-      .agfield
-        = radio_button_tag( registry.name.tr(' ','_'), registry )  = registry.name
+      #agfield
+        = radio_button_tag registry.name.tr(' ','_'), @user.registry   =registry.name
         /= observe_field registry.name, url: gift_registry_toggle_path(@gift), update: registry.id
-      .aglabel
+      #aglabel
       
-.clearer
+#clearer

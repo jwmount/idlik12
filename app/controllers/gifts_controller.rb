@@ -12,7 +12,6 @@ class GiftsController < ApplicationController
   # If there are no registries, cannot be any gifts.  So notify user and redirect_to ????.
   # If there are registries, hold onto registry[0] (why?) and return what's in there as appropriate.
   def index
-    debugger
     if @user.registries.empty?
       flash[:info] = "No registries or gifts found, time to create some?"
     else

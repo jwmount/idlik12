@@ -4,6 +4,7 @@
 
   -if !r.name.nil?
     %li= link_to r.name, controller:'gifts', action:'index_for_registry', registry_id: r.id 
+    //%li= link_to r.name, user_registries_path( @user ) 
     - if r.name == "#{ENV['DEFAULT_REGISTRY_NAME']}"
       %br
 
