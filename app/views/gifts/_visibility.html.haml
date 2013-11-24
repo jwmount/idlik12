@@ -1,0 +1,20 @@
+  %div#clearer
+
+
+  = render 'which_registries_show_in'
+
+  %br
+  %br
+  %div#aglabel "Who Can See This Gift?:
+
+
+  <!-- fixed choices -->
+  <div class="agfield"><%= check_box_tag 'gift', 'gift.i_can_see', true, :disabled=>true %>Me</div>
+  <div class="agfield"><%= f.check_box :friends_can_see %>All My Friends</div>
+  <!-- end fixed choices -->
+
+  <!-- selected friends  -->
+    <div class="clearer"></div>
+    <%= render 'who_can_see' %>
+  <!-- end >
+  < end selected friends -->

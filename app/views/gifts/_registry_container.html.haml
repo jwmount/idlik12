@@ -17,6 +17,7 @@
           = link_to (image_tag gift.photo.url(:preview)), user_gift_path(@user,gift.id)
 
           .item_inner
+          
             %h3= gift.name
             = link_to (image_tag("btn_share.png")), user_gift_path(@user,gift), alt: "Share Item"
             = link_to (image_tag("btn_details.png")), user_gift_path(@user,gift)
