@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_user, :except => :new
-  before_filter :mailer_set_url_options
+#  before_filter :mailer_set_url_options
   layout 'welcome'
      
   def index
@@ -31,6 +31,7 @@ class UsersController < ApplicationController
       @user.null_gates
       if @user.save
         flash[:notice] = User::REGISTRATION_SUCCESSFUL 
+        UserMailer.welcome_email(@user).deliver
         redirect_to orient_path
       else
          render :action => 'new'
@@ -87,9 +88,9 @@ private
 
 # TEMPORARY -- turned off Thurs pm 7-22 to enable app to run, email may not work
 # Turned on Nov 19, 2013 to reactivate as part of idlik12
-  def mailer_set_url_options
-    MemberMailer::Base.default_url_options[:host] = request.host_with_port
-  end
+#  def mailer_set_url_options
+#    MemberMailer::Base.default_url_options[:host] = request.host_with_port
+#  end
 
 #
 # S T R O N G  P A R A M E T E R S

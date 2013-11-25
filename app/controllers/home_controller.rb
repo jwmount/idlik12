@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-#  filter_resource_access
+  protect_from_forgery
+  #skip_before_action :verify_authenticity_token, if: :json_request?#  filter_resource_access
   layout 'welcome'
   
   def index

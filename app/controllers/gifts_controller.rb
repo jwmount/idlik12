@@ -1,9 +1,10 @@
-require 'debugger'
+#require 'debugger'
 class GiftsController < ApplicationController
+  layout 'application'
+  protect_from_forgery 
+  #skip_before_action :verify_authenticity_token, if: :json_request?  
   before_filter :require_user 
 
-  #  filter_resource_access
-  layout 'application'
   before_filter :find_user
   before_filter :find_friend, :except => :select_friend_registry
  
