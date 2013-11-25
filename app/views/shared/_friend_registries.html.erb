@@ -1,4 +1,4 @@
-<li><%= link_to 'Recently Added y', user_gifts_path(@friend) %></li><br/>
+<li><%= link_to 'Recently Added', user_gifts_path(@friend) %></li><br/>
 
 <% @friend.registries.all.each do |@r|%>
   <li><%= link_to @r.name, :controller=>'gifts', :action=>'index_for_registry', 
