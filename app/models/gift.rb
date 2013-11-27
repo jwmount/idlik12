@@ -10,7 +10,9 @@ class Gift < ActiveRecord::Base
  Gift::NO_CURRENT_REGISTRY = "No registry found, there is no default registry yet."
  Gift::GIFT_REGISTRY_MISSING = "Gift is not assigned to a registry."
  Gift::GIFT_INDUCTED         = "Gift is now part of your collection."
+  GIFT_UPDATE_OK = 'Gift was successfully updated.'
  
+
  has_attached_file :photo,
   :styles => {
      :tiny => "50x50#",
@@ -30,13 +32,16 @@ class Gift < ActiveRecord::Base
  # Paperclip Validations
  validates_attachment_presence :photo
  validates_attachment_size :photo, :less_than => 5.megabytes
+ #validates_attachment_size :photo, :less_than => 1.megabyte, 
+ # :unless => Proc.new { |imports| imports.photo_file_name.blank? }
  validates_attachment_content_type :photo, :content_type => ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/tiff']
 
- # Instance Validations
- validates_associated :user
+# Instance Validations
+ validates_presence_of :registry_id
  validates_associated :registry
-  
-  GIFT_UPDATE_OK = 'Gift was successfully updated.'
+ validates_associated :user
+
+
   
   # Possibly none, some, or all of @gifts may visible.
   # @user is may be current_user or the person being visited.

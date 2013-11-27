@@ -28,7 +28,7 @@ class GiftsController < ApplicationController
   # set @registry passed in to current so gifts are collected in it
   def index_for_registry
     @registry = Registry.find params[:registry_id]
-    @gifts = Gift.find :all, :conditions => ["registry_id = ?", @registry.id]
+    @gifts = @registry.gifts
     render :action => 'index'
   end
 
@@ -69,7 +69,8 @@ class GiftsController < ApplicationController
 
 
   def new
-      @gift = Gift.new
+    @gift = Gift.new
+    @registries = @user.registries
   end
 
   def edit
@@ -94,15 +95,13 @@ class GiftsController < ApplicationController
   # New gifts must go into a registry.  If none exists, one has to be created.
   def create
     @gift = @user.gifts.create(gift_params)
+    @gift.registry_id = params[:registry_id]
+    @registries = @user.registries
+
     respond_to do |format|
-      if @gift.registry_id.nil?
-        flash[:warning] = Gift::GIFT_REGISTRY_MISSING
-        format.html { redirect_to( edit_gift_path(@gift) ) }
-        format.xml  { render :xml => @gift.errors, :status => :unprocessable_entity }
-      end
-      if @gift.save
+      if @gift.save!
         flash[:notice] = Gift::GIFT_INDUCTED
-        format.html { redirect_to( edit_gift_path(@gift) ) }
+        format.html { redirect_to( gift_path(@gift) ) }
         format.xml  { render :xml => @gift, :status => :created, :location => @gift }
       else
         format.html { render :action => "new" }

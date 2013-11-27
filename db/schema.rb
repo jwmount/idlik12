@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20100814182947) do
 
   create_table "gifts", force: true do |t|
     t.integer  "user_id",                            null: false
-    t.integer  "registry_id"
+    t.integer  "registry_id",                        null: false
     t.string   "name",                               null: false
     t.string   "source",             default: "",    null: false
     t.string   "description",        default: "",    null: false
