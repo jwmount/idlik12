@@ -4,6 +4,7 @@ class UserSessionsController < ApplicationController
  layout 'welcome'
 
   # NOTE:  AuthLogic will automatically use :email for login if 'login' in not defined in schema.
+  # http://stackoverflow.com/questions/5573208/setting-up-authlogic-i-keep-hitting-undefined-method-login-for-usersession
   def new
     @user_session = UserSession.new
   end
