@@ -11,7 +11,7 @@
 		      <% end %>
 		  </li>
 	      <li><%= link_to_unless_current '', new_gift_path, :class => "addgift" %></li>
-	      <li><%= link_to_unless_current '', user_invite_path(@user), :class => "invitefriend" %></li>
+	      <li><%= link_to_unless_current '', invite_user_path(@user), :class => "invitefriend" %></li>
 	    <% end %>
 
 	  <% if !@user.friends.nil? %>

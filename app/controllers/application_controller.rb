@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
 
      #Add @friend's email and name to host's list of friends (or create it if this is first one!)
      begin
-       @host.friends[@friend.email] = @friend.username
+       @host.friends[@friend.email] = @friend.name
      rescue
        flash[:notice] = "Problem with friends here"
 #       @host.friends << {@friend.email, @friend.username}
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
 
      # Put @host's credentials in @friend's list
      begin
-       @friend.friends[@friend.email] = @friend.username
+       @friend.friends[@friend.email] = @friend.name
      rescue
        flash[:notice] = "Problem with friends here"
        #@friend.friends = {@friend.email, @friend.username}
@@ -55,9 +55,9 @@ class ApplicationController < ActionController::Base
      if @host.save and @friend.save
        params[:user][:message] = params[:message]
        MemberMailer.deliver_invitation(params[:user], @host.email, params[:message] )
-       flash[:notice] = "You've invited Idlika member #{@friend.username}.  You can invite someone else now."
+       flash[:notice] = "You've invited Idlika member #{@friend.name}.  You can invite someone else now."
      else
-       flash[:notice] = "Your invitation to Idlika member #{@friend.username} using #{@friend.email} could not be created.  " 
+       flash[:notice] = "Your invitation to Idlika member #{@friend.name} using #{@friend.email} could not be created.  " 
      end
    end
    
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
      @host = current_user
      @friend = User.new
      
-     @friend.username = params[:user][:username]
+     @friend.name = params[:user][:name]
      @friend.password = ENV['INVITATION_PASSWORD']
      @friend.password_confirmation = ENV['INVITATION_PASSWORD']
      @friend.email = params[:user][:email]
@@ -73,14 +73,14 @@ class ApplicationController < ActionController::Base
 
      #Add email and name to host's list of friends (or create it if this is first one!)
      begin
-       @host.friends[@friend.email] = @friend.username
+       @host.friends[@friend.email] = @friend.name
      rescue
        flash[:notice] = "Problem with friends here"     	
        #@host.friends = {@friend.email, @friend.username}
      end
      
      begin
-       @friend.friends[@host.email] = @host.username
+       @friend.friends[@host.email] = @host.name
      rescue
        flash[:notice] = "Problem with friends here"     	     	
        #@friend.friends = {@host.email, @host.username}
@@ -91,10 +91,10 @@ class ApplicationController < ActionController::Base
        @registry = Registry.new(:name=>"#{ENV['DEFAULT_REGISTRY_NAME']}", :description=>"Items added recently.", :user_id=>@friend.id)
        @registry.save!
        MemberMailer.deliver_invitation(params[:user], @host.email)
-       flash[:notice] = "You've invited #{@friend.username} at #{@friend.email} to visit you on Idlika.  You can invite someone else now."
+       flash[:notice] = "You've invited #{@friend.name} at #{@friend.email} to visit you on Idlika.  You can invite someone else now."
      else
-       flash[:warning] = "Your invitation to #{@friend.username} with email #{@friend.email} could not be created.  " +
-                        "Usually this means #{@friend.username} is already a member and #{@friend.email} is already taken."
+       flash[:warning] = "Your invitation to #{@friend.name} with email #{@friend.email} could not be created.  " +
+                        "Usually this means #{@friend.name} is already a member and #{@friend.email} is already taken."
      end
  end
    

@@ -1,8 +1,9 @@
-require 'debugger'
+#require 'debugger'
 class UserSessionsController < ApplicationController
  Authlogic::Session::Base.controller = Authlogic::ControllerAdapters::RailsAdapter.new(self) 
  layout 'welcome'
 
+  # NOTE:  AuthLogic will automatically use :email for login if 'login' in not defined in schema.
   def new
     @user_session = UserSession.new
   end

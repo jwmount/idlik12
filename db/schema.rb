@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 20100814182947) do
   end
 
   create_table "users", force: true do |t|
-    t.text     "friends",                           null: false
-    t.string   "username",          default: "",    null: false
+    t.text     "friends"
+    t.string   "name",              default: "",    null: false
     t.string   "email",             default: "",    null: false
     t.boolean  "terms_accepted_cb", default: false, null: false
     t.string   "crypted_password",                  null: false

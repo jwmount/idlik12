@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   layout 'welcome'
      
   def index
-    @users = User.all :order => :username
+    @users = User.all :order => :name
   end
 
   def show
@@ -20,17 +20,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    unless params[:user][:terms_accepted_cb] == "1"
-      flash[:notice] = User::DID_NOT_ACCEPT_TANDC 
+    unless params[:user][:terms_accepted_cb]
+      flash[:notice] = Constants::TERMS_AND_CONDITIONS
       redirect_to :action => 'new'
     else
-      @user = User.new(params[:user])
+      @user = User.new(user_params)
       Role.all.each do |r|
         @user.role_id = r.id if r.name == "guest"
       end
-      @user.null_gates
-      if @user.save
-        flash[:notice] = User::REGISTRATION_SUCCESSFUL 
+      if @user.save!
+        flash[:notice] = Constants::REGISTRATION_SUCCESSFUL 
         UserMailer.welcome_email(@user).deliver
         redirect_to orient_path
       else
@@ -42,7 +41,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      flash[:notice] = User::MODIFIED_PROFILE_OK
+      flash[:notice] = Contants::MODIFIED_PROFILE_OK
       redirect_to user_gifts_url(@user)
     else
         render :action => 'edit'
@@ -96,5 +95,13 @@ private
 # S T R O N G  P A R A M E T E R S
 #  
   #attr_accessible :username, :email, :password, :password_confirmation, :terms_accepted_cb
+  def user_params
+    params.require(:user).permit( :name,
+                                  :email,
+                                  :password,
+                                  :password_confirmation,
+                                  :terms_accepted_cb
+                                  )
+  end
  
 end

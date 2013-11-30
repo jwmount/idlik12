@@ -5,9 +5,9 @@
   <%= render :partial => 'shared/friend_sidebar' %>
   
   <div id="li_content">
-    <h1><%= @registry.name %> Items Selected by <%= @friend.username %>.</h1>
+    <h1><%= @registry.name %> Items Selected by <%= @friend.name %>.</h1>
 
-    <% if !@gifts.nil? and allowed_to_view? current_user[:username] %>
+    <% if !@gifts.nil? and allowed_to_view? current_user[:name] %>
 
     <h3>To Change Friends or Registry Click on Image</h3>
       <%= render :partial => 'registry_container', :collection => @gifts %>

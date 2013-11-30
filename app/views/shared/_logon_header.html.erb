@@ -3,7 +3,7 @@
   <% if show_links? %>    <!--ENV['RAILS_ENV'] == 'development' % -->
 	<div id="user_nav">
 		<% if !current_user.nil? %>
-		  Hello, <b><%=h current_user[:username] %></b>.  
+		  Hello, <b><%=h current_user[:name] %></b>.  
 		  <%= link_to "Logout", logout_path %>
 		<% else %>		
 		  <%= link_to_unless_current "Register", new_user_path %> |

@@ -8,10 +8,14 @@
 <%= form_for @user_session, url: {action: "create"}, html: {class: "addgift_form"} do |f| %>
   
 
-  <div class="aglabel" style="width:100px;"><%= f.label :username %>:
-  <span class="required">*</span></div>
+  <div class="aglabel" style="width:100px;">
+  	<%= f.label :email %>
+    <span class="required">*</span>
+  </div>
 
-  <div class="agfield"><%= f.text_field :username %></div>
+  <div class="agfield">
+  	<%= f.text_field :email %>
+  </div>
   <div class="clearer"></div>
 
   <div class="aglabel" style="width:100px;">Password:

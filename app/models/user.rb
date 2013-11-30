@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   
   serialize :friends
   
-  validates_presence_of :username
+  validates_presence_of :name
   validates_presence_of :email
 #  validates_acceptance_of :terms_accepted_cb
 
@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       
   def role_symbols
     roles.map do |role|
-      role.username.underscore.to_sym
+      role.name.underscore.to_sym
     end
   end
   

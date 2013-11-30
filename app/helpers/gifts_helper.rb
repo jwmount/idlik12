@@ -6,7 +6,7 @@ module GiftsHelper
     return true if is_current_user? name
   
     #Get this user, return FALSE if this user doesn't exist (list comes from .friends, not by row of User table!)
-    @user_allowed = User.find_by_username name, :select => :id
+    @user_allowed = User.find_by_name name, :select => :id
     return false if @user_allowed.nil?
     
     @allow = Donor.find_by_gift_id( @user_allowed.id, :conditions => ["allow_id = ?", @gift.id ] )            # "NEED CONDITIONS ON HERE"
@@ -18,7 +18,7 @@ module GiftsHelper
   
   def is_current_user? name
     @current_user = current_user
-    name == @current_user.username
+    name == @current_user.name
   end
 
   def gift_is_in? rid

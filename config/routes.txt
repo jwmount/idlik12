@@ -8,14 +8,6 @@
                                    PATCH  /donors/:id(.:format)                         donors#update
                                    PUT    /donors/:id(.:format)                         donors#update
                                    DELETE /donors/:id(.:format)                         donors#destroy
-                            friend GET    /friend(.:format)                             gifts#friend
-                     select_friend GET    /select_friend(.:format)                      gifts#select_friend
-                  index_for_friend GET    /index_for_friend(.:format)                   gifts#index_for_friend
-                index_for_registry GET    /index_for_registry(.:format)                 gifts#index_for_registry
-                give_restore_owner GET    /gift_restore_owner(.:format)                 gifts#give_restore_owner
-                         give_gift GET    /give_gift(.:format)                          gifts#give_gift
-                         copy_gift GET    /copy_gift(.:format)                          gifts#copy_gift
-                   gift_init_index GET    /gifts/:gift_id/init_index(.:format)          gifts#init_index
                              gifts GET    /gifts(.:format)                              gifts#index
                                    POST   /gifts(.:format)                              gifts#create
                           new_gift GET    /gifts/new(.:format)                          gifts#new
@@ -24,6 +16,14 @@
                                    PATCH  /gifts/:id(.:format)                          gifts#update
                                    PUT    /gifts/:id(.:format)                          gifts#update
                                    DELETE /gifts/:id(.:format)                          gifts#destroy
+                        init_index GET    /init_index(.:format)                         gifts#init_index
+                            friend GET    /friend(.:format)                             gifts#friend
+                     select_friend GET    /select_friend(.:format)                      gifts#select_friend
+                  index_for_friend GET    /index_for_friend(.:format)                   gifts#index_for_friend
+                index_for_registry GET    /index_for_registry(.:format)                 gifts#index_for_registry
+                give_restore_owner GET    /gift_restore_owner(.:format)                 gifts#give_restore_owner
+                         give_gift GET    /give_gift(.:format)                          gifts#give_gift
+                         copy_gift GET    /copy_gift(.:format)                          gifts#copy_gift
                               home POST   /home(.:format)                               homes#create
                           new_home GET    /home/new(.:format)                           homes#new
                          edit_home GET    /home/edit(.:format)                          homes#edit
@@ -75,9 +75,6 @@
                             logout GET    /logout(.:format)                             user_sessions#destroy
                                new GET    /signup(.:format)                             user_sessions#new
                             orient GET    /orient(.:format)                             user_sessions#orient
-                       user_invite GET    /users/:user_id/invite(.:format)              users#invite
-                   user_invitation GET    /users/:user_id/invitation(.:format)          users#invitation
-                user_accept_invite GET    /users/:user_id/accept_invite(.:format)       users#accept_invite
                              users GET    /users(.:format)                              users#index
                                    POST   /users(.:format)                              users#create
                           new_user GET    /users/new(.:format)                          users#new
@@ -86,6 +83,16 @@
                                    PATCH  /users/:id(.:format)                          users#update
                                    PUT    /users/:id(.:format)                          users#update
                                    DELETE /users/:id(.:format)                          users#destroy
+                        invitation GET    /invitation(.:format)                         users#invitation
+                     accept_invite GET    /accept_invite(.:format)                      users#accept_invite
+                       invite_user GET    /user/invite(.:format)                        users#invite
+                                   POST   /user(.:format)                               users#create
+                                   GET    /user/new(.:format)                           users#new
+                                   GET    /user/edit(.:format)                          users#edit
+                                   GET    /user(.:format)                               users#show
+                                   PATCH  /user(.:format)                               users#update
+                                   PUT    /user(.:format)                               users#update
+                                   DELETE /user(.:format)                               users#destroy
                         user_gifts GET    /users/:user_id/gifts(.:format)               gifts#index
                                    POST   /users/:user_id/gifts(.:format)               gifts#create
                      new_user_gift GET    /users/:user_id/gifts/new(.:format)           gifts#new

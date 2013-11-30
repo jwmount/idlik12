@@ -45,7 +45,7 @@
 <% end %>
 
 <!-- I'LL GET THIS appears only when visiting someone else's list -->
-<%= link_to( "I'll Get This Gift for #{@user.username}", @gift_give_gift_path ) unless @user.id == current_user[:id] %>
+<%= link_to( "I'll Get This Gift for #{@user.name}", @gift_give_gift_path ) unless @user.id == current_user[:id] %>
 
 <br />
 

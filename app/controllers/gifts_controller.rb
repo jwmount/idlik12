@@ -35,11 +35,11 @@ class GiftsController < ApplicationController
   # Display gifts of selected friend.  At this point we only know the friend by id
   def index_for_friend
       session.clear
-      @friend = User.find_by_username params[:friend_username]
+      @friend = User.find_by_name params[:friend_name]
       session[:current_friend] = @friend
       @friend = session[:current_friend]
       @gifts = @friend.gifts
-      logger.info("*-*-*-* gifts_controller.select_friend: id: #{@friend.id}, name: #{@friend.username}" )
+      logger.info("*-*-*-* gifts_controller.select_friend: id: #{@friend.id}, name: #{@friend.name}" )
   end
       
   # REMINDER:  before_filter :find_friend, :except => :select_friend_registry
@@ -92,7 +92,7 @@ class GiftsController < ApplicationController
       render :show
     end
   
-  # New gifts must go into a registry.  If none exists, one has to be created.
+  # New gifts must go into a registry.  But WHY is this value lost in the gift_params call?
   def create
     @gift = @user.gifts.create(gift_params)
     @gift.registry_id = params[:registry_id]
@@ -141,7 +141,7 @@ class GiftsController < ApplicationController
     if params[params[:friend]] == "null"
       # turn disallow viewing, so find it, if found, destroy it
       # they can't see gift nn owned by user uu
-      @friend_allowed = User.find_by_username( params[:friend], :select => :id )
+      @friend_allowed = User.find_by_name( params[:friend], :select => :id )
       @donors = Donor.find_all_by_gift_id( @gift.id, :conditions => [ "allow_id = ?", @friend_allowed.id ] )
 
       # if Donor.destroy_all(["'user_id' = ? AND  'gift_id' = ?", @friend_allowed.id, @gift.id])
@@ -152,7 +152,7 @@ class GiftsController < ApplicationController
     else
       @donor = Donor.new
       @donor.allow_id = @user.id
-      @friend_allowed = User.find_by_username( params[params[:friend]], :select => :id )
+      @friend_allowed = User.find_by_name( params[params[:friend]], :select => :id )
       @donor.allow_id = @friend_allowed.id
       @donor.gift_id = params[:gift_id]
       if @donor.save
@@ -164,12 +164,12 @@ class GiftsController < ApplicationController
     # Logically this may be redundant with the Donor model, t.b.d.    
     # redirect at bottom is NOT expendable!
     @gift = Gift.find params[:gift_id]
-    friend = User.find_by_username params[:friend]
+    friend = User.find_by_name params[:friend]
 
     @value = params[:friend]
     @value = params[@value]
 #    @permit = params[@value].nil? ? {friend.username, 'no'} : {friend.username, 'yes'}  
-    @permit = params[@value].nil? ? friend.username == 'no' : friend.username == 'yes'
+    @permit = params[@value].nil? ? friend.name == 'no' : friend.name == 'yes'
 
     @gift.who_can_see = {}
     @gift.who_can_see.merge! @permit

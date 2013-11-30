@@ -95,10 +95,12 @@ Idlik12::Application.routes.draw do
   get "orient",             to: 'user_sessions#orient',     as: :orient
 
 
-  resources :users do #,   has_many: [:registries, :roles, :gifts, :friends]
+  resources :users
+  get 'invitation',         to: 'users#invitation',         as: :invitation
+  get 'accept_invite',      to: 'users#accept_invite',      as: :accept_invite
+
+  resource :user do
     get 'invite',             to: 'users#invite',             as: :invite
-    get 'invitation',         to: 'users#invitation',         as: :invitation
-    get 'accept_invite',      to: 'users#accept_invite',      as: :accept_invite
   end
 
   resources :users do    

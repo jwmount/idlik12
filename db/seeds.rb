@@ -24,10 +24,10 @@ user_list = [
   [ "peta", "peta.forbes@roster365.com.au" ],
   [ "tony", "tgodino@me.com" ]
   ]
-user_list.each do |username, email, role|  
+user_list.each do |name, email, role|  
   User.create!( 
   	          friends: "",
-  	          username: username,
+  	          name: name,
   	          email: email, 
   	          password: '12345', 
               password_confirmation: '12345'

@@ -1,9 +1,9 @@
 
-<%= form_for @user, url: {action: "create"}, html: {class: "join_idlika"} do |f| %>
+<%= form_for @user, url: {action: "create"}, html: {method: 'post'} do |f| %>
 
-  <div class="aglabelform"><%= f.label :username %>:
+  <div class="aglabelform"><%= f.label :name %>:
   <span class="required">*</span></div>
-  <div class="agtext"><%= f.text_field :username %></div>
+  <div class="agtext"><%= f.text_field :name %></div>
   <div class="clearer"></div><br/>
   
   <div class="aglabelform"><%= f.label :email %>:

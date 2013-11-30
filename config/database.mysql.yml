@@ -20,7 +20,7 @@ development:
     reconnect: false
     database: idlika_test
     pool: 5
-    username: john
+    name: john
     password: 180lbs
     socket: /tmp/mysql.sock
 
@@ -30,7 +30,7 @@ development:
     reconnect: false
     database: idlika_production
     pool: 5
-    username: john
+    name: john
     password: 180lbs
   #  socket: /tmp/mysql.sock 
   # deploy with:

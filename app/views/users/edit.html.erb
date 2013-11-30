@@ -5,13 +5,13 @@
 
 <h1 class="my_account"></h1>
 
-  <% form_for @user, url: {action: "edit"}, html: {class: "addgift_form"}do |f| %>
+  <% form_for @user, url: {action: "edit"}, html: {class: "addgift_form"} do |f| %>
 
   <div id="addgift_form">
 
     <div class="clearer"></div>
     <div class="aglabel">Name:</div>
-    <div class="agfield"> <%= f.text_field :username, :size=>'60' %></div>
+    <div class="agfield"> <%= f.text_field :name, :size=>'60' %></div>
     
     <div class="clearer"></div>
     <div class="aglabel">Email:</div>

@@ -1,11 +1,10 @@
+<%= form_for @friend, url: {action: @user_invitation_path}, html: {class: "addgift_form"} do |f| %>
 
-<% form_for :user, @friend, :url=>invitation_url, :html=>{:method=>'put'} do |f| %>
-  <%= f.error_messages %>
   <div id="addgift_form">
 
   <div class="clearer"></div>
   <div class="aglabel" style="width:100px;">Friend's Name:</div>
-  <div class="agfield"> <%= f.text_field :username %></div>
+  <div class="agfield"> <%= f.text_field :name %></div>
   <br />
   
   <div class="clearer"></div>

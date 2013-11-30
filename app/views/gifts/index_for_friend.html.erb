@@ -2,11 +2,11 @@
 <br/>
 <div id="li_body">
 	
-  <%= render :partial => 'shared/sidebar' %>
+  <%= render 'shared/sidebar' %>
   
   <div id="li_content">
  
-    <h2>Things <%=h @friend.username%> Likes</h2>
+    <h2>Things <%=h @friend.name%> Likes</h2>
 
     <% if @gifts.empty? %>
 
@@ -15,7 +15,7 @@
     <% else %>
 
       <h3>To Change Friends or Registry Click on Image</h3>
-        <%= render :partial => 'friend_container', :collection => @gifts %>
+        <%= render 'friend_container', :collection => @gifts %>
 
     <% end %>
 

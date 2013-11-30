@@ -79,7 +79,7 @@ class RegistriesController < ApplicationController
   def destroy
     @registry = Registry.find(params[:id])
     @registry.destroy
-    logger.info "*-*-*-*-* #{@registry.name} deleted by #{@user.username}."
+    logger.info "*-*-*-*-* #{@registry.name} deleted by #{@user.name}."
 
     respond_to do |format|
       format.html { redirect_to( user_gifts_url(@user)) }
@@ -93,7 +93,7 @@ private
 
   def find_user
     @user = current_user
-    logger.info "*-*-*-*-* registries_controller.find_user: @user => #{@user.username}, params[:id]=>#{params[:id]}."
+    logger.info "*-*-*-*-* registries_controller.find_user: @user => #{@user.name}, params[:id]=>#{params[:id]}."
   end
   
   # Using a private method to encapsulate the permissible parameters is just a good pattern
