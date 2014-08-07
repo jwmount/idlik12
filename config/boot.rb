@@ -6,7 +6,7 @@ ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
-ENV['VERSION'] = "&copy2010, 2013 idlika partners LLC v0.74 "
+ENV['VERSION'] = "&copy2010, 2014 idlika partners LLC v0.75 "
 
 # below was in locals/environment.#!/usr/bin/env ruby
 # AMAZON
